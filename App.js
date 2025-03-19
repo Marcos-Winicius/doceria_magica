@@ -1,20 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "./screens/HomeScreen";
+import CarrinhoCompraScreen from "./screens/CarrinhoCompraScreen";
+import { CarrinhoProvider } from "./context/carrinhoContext";
+import { Ionicons } from "@expo/vector-icons";
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <CarrinhoProvider>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            // tabBarStyle: {
+            //   backgroundColor: '#5A9BD5', // Cor do fundo da tab bar
+            // },
+            tabBarIcon: ({ color, size }) => {
+              let iconName = route.name === "Home" ? "home" : "cart";
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+        >
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Carrinho" component={CarrinhoCompraScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </CarrinhoProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
