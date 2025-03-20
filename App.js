@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CarrinhoCompraScreen from "./screens/CarrinhoCompraScreen";
 import { CarrinhoProvider } from "./context/carrinhoContext";
 import { Ionicons } from "@expo/vector-icons";
+import PedidosScreen from "./screens/PedidosScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +26,7 @@ export default function App() {
         >
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Carrinho" component={CarrinhoCompraScreen} />
+          <Tab.Screen name="Pedidos" component={PedidosScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </CarrinhoProvider>
